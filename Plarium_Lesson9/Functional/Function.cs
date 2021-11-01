@@ -7,7 +7,9 @@ namespace Plarium_Lesson9
 {
     class Function
     {
-        //Вывод информации о сувенирах и их производителях
+        /// <summary>
+        /// Метод выводит информацию о сувенирах и их производителях
+        /// </summary>
         public static void DisplayAllInformation()
         {
             //Проверка списка на пустоту
@@ -20,7 +22,7 @@ namespace Plarium_Lesson9
                     {
                         //Показ информации о сувенире
                         souvenir.DisplayInformationSouvenir();
-                        //Проход по элемнтам словаря
+                        //Проход по элементам словаря
                         foreach (KeyValuePair<int, Manufacturer> keyValue in AddDelete.Manufacturers)
                         {
                             //Если равны ключ и реквизиты производителя
@@ -38,7 +40,11 @@ namespace Plarium_Lesson9
             else Console.WriteLine("Нет информации о сувенирах!");
         }
 
-        //Метод для показа информации о сувенире по ключу
+        /// <summary>
+        /// Метод записывает информацию о сувенире по ключу в файл
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="flag"></param>
         static void KeyMatchingForList(int key, ref bool flag)
         {
             foreach (Souvenir value in AddDelete.collectionClass)
@@ -53,7 +59,12 @@ namespace Plarium_Lesson9
                 }
             }
         }
-        //Метод для показа информации о производителю по ключу
+
+        /// <summary>
+        /// Метод записывает информацию о производителе по ключу в файл
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="flag"></param>
         static void KeyMatchingForDictionary(int key, ref bool flag)
         {
             if (AddDelete.Manufacturers.ContainsKey(key))
@@ -66,7 +77,9 @@ namespace Plarium_Lesson9
             }
         }
 
-        //Метод для вывода информации о сувенирах по названию производителя
+        /// <summary>
+        /// Метод записывает в файл и выводит информацию о сувенирах по названию производителя
+        /// </summary>
         public static void DisplayInformationByManufacturer()
         {
             string name = Input.InputManufacturerName();
@@ -79,12 +92,12 @@ namespace Plarium_Lesson9
             {
                 //Проход по элементам словаря
                 foreach (KeyValuePair<int, Manufacturer> keyValue in AddDelete.Manufacturers)
-                {//Проверка, есть ли такое название
+                {
+                    //Проверка, есть ли такое название
                     if (string.Equals(keyValue.Value.ManufacturerName, name, StringComparison.OrdinalIgnoreCase))
                         KeyMatchingForList(keyValue.Key, ref flag);
-                    //Вывод информации по ключу
+                    //Запись информации по ключу
                 }
-                
                 if (!flag)
                     throw new Exception();
             }
@@ -98,8 +111,9 @@ namespace Plarium_Lesson9
             }
             SearchTextInFile(header);
         }
-
-        //Метод для вывода информации о сувенирах по названию страны производителя
+        /// <summary>
+        /// Метод записывает в файл и выводит информацию о сувенирах по названию страны производителя
+        /// </summary>
         public static void DisplayInformationByCountry()
         {
             string country = Input.InputManufacturerCountry();
@@ -115,7 +129,7 @@ namespace Plarium_Lesson9
                 {//Проверка, есть ли такое название страны
                     if (string.Equals(keyValue.Value.ManufacturerCountry, country, StringComparison.OrdinalIgnoreCase))
                         KeyMatchingForList(keyValue.Key, ref flag);
-                    //Вывод информации по ключу
+                    //Запись информации по ключу
                 }
                 if (!flag)
                     throw new Exception();
@@ -131,8 +145,9 @@ namespace Plarium_Lesson9
             SearchTextInFile(header);
 
         }
-
-        //Метод для вывода информации о производителях, чьи цены на сувениры меньше заданной
+        /// <summary>
+        /// Метод записывает в файл и выводит информацию о производителях, чьи цены на сувениры меньше заданной
+        /// </summary>
         public static void DisplayInformationByPrice()
         {
             decimal price = Input.InputPrice();
@@ -149,7 +164,7 @@ namespace Plarium_Lesson9
                     if (value.Price < price)
                     {
                         KeyMatchingForDictionary(value.ManufacturerRequisites, ref flag);
-                        //Вывод информации по ключу
+                        //Запись информации по ключу
                     }
 
                 }
@@ -166,8 +181,10 @@ namespace Plarium_Lesson9
             }
             SearchTextInFile(header);
         }
-
-        //Метод для вывода информации о производителях заданного сувенира, произведенного в заданном году
+        /// <summary>
+        /// Метод записывает в файл и выводит информацию о производителях
+        /// заданного сувенира, произведенного в заданном году
+        /// </summary>
         public static void DisplayInformationByDate()
         {
             string souvenirName = Input.InputSouvenirName();
@@ -186,7 +203,7 @@ namespace Plarium_Lesson9
                     if (string.Equals(value.SouvenirName, souvenirName, StringComparison.OrdinalIgnoreCase) && value.ReleaseDate == releaseDate)
                     {
                         KeyMatchingForDictionary(value.ManufacturerRequisites, ref flag);
-                        //Вывод информации по ключу
+                        //Запись информации по ключу
                     }
                 }
                 if (!flag)
@@ -202,7 +219,10 @@ namespace Plarium_Lesson9
             }
             SearchTextInFile(header);
         }
-        //Метод изменения цены сувенира по ID
+        /// <summary>
+        /// Метод меняет цену сувенира по ID
+        /// </summary>
+        /// <param name="flag"></param>
         public static void PriceChange(ref bool flag)
         {
             Console.Write("Введите ID сувенира: ");
@@ -242,17 +262,24 @@ namespace Plarium_Lesson9
                 Console.WriteLine($"Сувенира с ID {id} нет в базе!");
             }
         }
-        //Оповещение об изменении цены
+        /// <summary>
+        /// Метод оповещает об изменении цены
+        /// </summary>
+        /// <param name="flag"></param>
         public static void PriceChangeNotification(ref bool flag)
         {
             if (flag)
             {
                 Console.WriteLine($"Вы изменили цену!");
+                //Файл очищается, чтобы не хранить некорректную информацию
                 File.WriteAllText(Program.path, String.Empty);
             }
         }
 
-        //Метод который сортирует список по параметру, в зависимости от переданного делегата
+        /// <summary>
+        /// Метод сортирует список по параметру, в зависимости от переданного делегата
+        /// </summary>
+        /// <param name="sortDelegate"></param>
         public static void SortList(EventDelegate.SortDelegate sortDelegate)
         {
             if (AddDelete.collectionClass.Length() > 0)
@@ -262,6 +289,10 @@ namespace Plarium_Lesson9
             }
             else Console.WriteLine("Списк пуст!");
         }
+        /// <summary>
+        /// Метод записывает заголовок запроса в файл
+        /// </summary>
+        /// <param name="header"></param>
         public static void WritingHeaderToFile(string header)
         {
             using (var sw = new StreamWriter(Program.path, true))
@@ -269,6 +300,10 @@ namespace Plarium_Lesson9
                 sw.WriteLine(header);
             }
         }
+        /// <summary>
+        /// Метод ищет по заголовку нужную информацию в файле и выводи на консоль
+        /// </summary>
+        /// <param name="str"></param>
         public static void SearchTextInFile(string str)
         {
             string line;
@@ -286,6 +321,9 @@ namespace Plarium_Lesson9
                 }
             }
         }
+        /// <summary>
+        /// Метод записывает в файл пустую строку
+        /// </summary>
         public static void WriteEmptyLine()
         {
             using (var sw = new StreamWriter(Program.path, true))

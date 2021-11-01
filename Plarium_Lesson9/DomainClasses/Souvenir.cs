@@ -6,9 +6,10 @@ using System.IO;
 
 namespace Plarium_Lesson9
 {
-    //Класс сувенира
-
+    
+    //Тип определяет контракт данных и может быть сериализован
     [DataContract]
+    //Класс сувенира
      abstract class Souvenir
     {
         //Инициализирующий конструктор
@@ -33,7 +34,10 @@ namespace Plarium_Lesson9
         public int ReleaseDate { get;  set; }
         [DataMember]
         public decimal Price { get; set; }
-
+        /// <summary>
+        /// Метод для записи информации в файл
+        /// </summary>
+        /// <param name="sw"></param>
         public virtual void WriteToFileInformationSouvenir(StreamWriter sw)
         {
             sw.WriteLine($"Вид сувенира: {KindOfSouvenir}");
@@ -42,6 +46,10 @@ namespace Plarium_Lesson9
             sw.WriteLine($"Год выпуска: {ReleaseDate}");
             sw.WriteLine($"Цена: {Price}");
         }
+        /// <summary>
+        /// Метод для записи информации в БД
+        /// </summary>
+        /// <param name="sw"></param>
         public virtual void WriteToDatabase(StreamWriter sw)
         {
             sw.Write($"{this.KindOfSouvenir},");
@@ -50,6 +58,9 @@ namespace Plarium_Lesson9
             sw.Write($"{this.Price},");
             sw.Write($"{this.ManufacturerRequisites},");
         }
+        /// <summary>
+        /// Метод для вывода информации в консоль
+        /// </summary>
         public virtual void  DisplayInformationSouvenir()
         {
             Console.WriteLine($"Вид сувенира: {KindOfSouvenir}");

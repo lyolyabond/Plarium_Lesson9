@@ -7,6 +7,7 @@ using System.IO;
 
 namespace Plarium_Lesson9
 {
+    //Тип определяет контракт данных и может быть сериализован
     [DataContract]
     class BusinessSouvenir : Souvenir
     {
@@ -22,18 +23,29 @@ namespace Plarium_Lesson9
         }
         public BusinessSouvenir()
         { }
-        //Переопределение метода
+
+        /// <summary>
+        /// Переопределённый метод для записи информации в файл
+        /// </summary>
+        /// <param name="sw"></param>
         public override void WriteToFileInformationSouvenir(StreamWriter sw)
         {
             base.WriteToFileInformationSouvenir(sw);
             sw.WriteLine($"Название компании бизнес-сувенира: {CompanyName}");
             sw.WriteLine("--------------------------");
         }
+        /// <summary>
+        /// Переопределённый метод для записи информации в БД
+        /// </summary>
+        /// <param name="sw"></param>
         public override void WriteToDatabase(StreamWriter sw)
         {
             base.WriteToDatabase(sw);
             sw.Write($"{this.CompanyName},");
         }
+        /// <summary>
+        /// Переопределённый метод для вывода информации в консоль
+        /// </summary>
         public override void DisplayInformationSouvenir()
         {
             base.DisplayInformationSouvenir();

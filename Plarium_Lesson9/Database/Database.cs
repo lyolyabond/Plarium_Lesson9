@@ -7,6 +7,10 @@ namespace Plarium_Lesson9
 {
     class Database
     {
+        /// <summary>
+        /// Метод создаёт БД по указаному названию, если она ещё не существует
+        /// </summary>
+        /// <param name="path"></param>
         public static void CreateDatabase(string path)
         {
             path += ".txt";
@@ -20,7 +24,10 @@ namespace Plarium_Lesson9
                 Console.WriteLine($"Файл {path} успешно создан!");
             }
         }
-
+        /// <summary>
+        /// Метод выводит в консоль информацию из БД
+        /// </summary>
+        /// <param name="path"></param>
         public static void ReadDatabase(string path)
         {
             path += ".txt";
@@ -41,7 +48,11 @@ namespace Plarium_Lesson9
             else Console.WriteLine("Такого файла не существует!");
         }
 
-
+        /// <summary>
+        /// Метод обновляет содержимое БД
+        /// </summary>
+        /// <param name="souvenirs"></param>
+        /// <param name="path"></param>
         public static void UpdateDatabase(CollectionClass souvenirs, string path)
         {
             path += ".txt";
@@ -63,6 +74,10 @@ namespace Plarium_Lesson9
             }
             else Console.WriteLine("Такого файла не существует или список пуст!");
         }
+        /// <summary>
+        /// Метод удаляет указанную БД, если она существует
+        /// </summary>
+        /// <param name="path"></param>
         public static void DeleteDatabase(string path)
         {
             path += ".txt";

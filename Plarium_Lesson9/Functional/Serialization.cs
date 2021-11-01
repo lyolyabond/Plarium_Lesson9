@@ -12,6 +12,9 @@ namespace Plarium_Lesson9
        public static string pathManufacturers = "Manufacturers.json";
        public static string pathSouvenirs = "Souvenirs.json";
 
+        /// <summary>
+        /// Метод сериализует словарь, где хранится информация о производителях
+        /// </summary>
         public static void ManufacturersSerialization()
         {
             var jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<int, Manufacturer>));
@@ -20,6 +23,9 @@ namespace Plarium_Lesson9
                 jsonFormatter.WriteObject(file, AddDelete.Manufacturers);
             }
         }
+        /// <summary>
+        /// Метод сериализует класс списка, где хранится информация о сувенирах
+        /// </summary>
         public static void SouvenirsSerialization()
         {
             
@@ -30,7 +36,11 @@ namespace Plarium_Lesson9
             }
 
         }
-         static Dictionary<int, Manufacturer> ManufacturersDeserialization()
+        /// <summary>
+        /// Метод десериализует строку json в объект типа словаря 
+        /// </summary>
+        /// <returns></returns>
+        static Dictionary<int, Manufacturer> ManufacturersDeserialization()
         {
             var jsonFormatter = new DataContractJsonSerializer(typeof(Dictionary<int, Manufacturer>));
            
@@ -38,8 +48,11 @@ namespace Plarium_Lesson9
             {
                 return  jsonFormatter.ReadObject(file) as Dictionary<int, Manufacturer>;   
             } 
-
         }
+        /// <summary>
+        /// Метод десериализует строку json в объект типа класса списка 
+        /// </summary>
+        /// <returns></returns>
         static CollectionClass SouvenirsDeserialization()
         {
             var jsonFormatter = new DataContractJsonSerializer(typeof(CollectionClass));
@@ -48,9 +61,10 @@ namespace Plarium_Lesson9
             {
                 return jsonFormatter.ReadObject(file) as CollectionClass;   
             }
-            /* string jsonstring = File.ReadAllText("Souvenirs.json");
-             CollectionClass list = JsonSerializer.Deserialize<CollectionClass>(jsonstring);*/
         }
+        /// <summary>
+        /// Метод проверяет существуют ли файлы для десериализации и вызывает методы
+        /// </summary>
         public static void Deserialization()
         {
             if(File.Exists(pathManufacturers) && File.Exists(pathSouvenirs))

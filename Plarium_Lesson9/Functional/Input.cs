@@ -6,12 +6,20 @@ namespace Plarium_Lesson9
 {
     class Input
     {
-        //Методы для ввода информации
+
+        /// <summary>
+        /// Ввод названия сувенира
+        /// </summary>
+        /// <returns></returns>
         public static string InputSouvenirName()
         { 
             Console.Write("Введите название сувенира: ");
            return Console.ReadLine();
         }
+        /// <summary>
+        /// Ввод года выпуска
+        /// </summary>
+        /// <returns></returns>
         public static int InputReleaseDate()
         {
             Console.Write("Введите год выпуска: ");
@@ -22,6 +30,10 @@ namespace Plarium_Lesson9
             }
             return releaseDate;
         }
+        /// <summary>
+        /// Ввод цены
+        /// </summary>
+        /// <returns></returns>
         public static decimal InputPrice()
         {
             Console.Write("Введите цену: ");
@@ -32,11 +44,19 @@ namespace Plarium_Lesson9
             }
             return price;
         }
+        /// <summary>
+        /// Ввод названия производителя
+        /// </summary>
+        /// <returns></returns>
         public static string InputManufacturerName()
         {
             Console.Write("Введите название производителя: ");
             return Console.ReadLine();
         }
+        /// <summary>
+        /// Ввод названия страны
+        /// </summary>
+        /// <returns></returns>
         public static string InputManufacturerCountry()
         {
             Console.Write("Введите страну производителя: ");

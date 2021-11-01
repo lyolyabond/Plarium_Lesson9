@@ -12,13 +12,15 @@ using System.Runtime.Serialization;
 
 namespace Plarium_Lesson9
 {
-    //Коллекция сущностей(список) представлена в виде класса 
-   
+    
+    //Тип определяет контракт данных и может быть сериализован
     [DataContract]
+    //Типы, которые следует включить при десериализации
     [KnownType(typeof(BusinessSouvenir))]
     [KnownType(typeof(PromotionalSouvenir))]
     [KnownType(typeof(ThematicSouvenir))]
     [KnownType(typeof(VIPGift))]
+    //Коллекция сущностей(список) представлена в виде класса 
     class CollectionClass 
     {
         //Список объектов класса сувенира
@@ -28,18 +30,26 @@ namespace Plarium_Lesson9
         {
             souvenirs = new List<Souvenir>();
         }
-        
-        //Индексатор по элементам коллекции
+
+        /// <summary>
+        /// Индексатор по элементам списка сувениров
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public Souvenir this[int index]
         {
             get 
-            {//Возвращает объект класса по индексу в списке(если не пустой)
+            {
+                //Возвращает объект класса по индексу в списке(если не пустой)
                 if (souvenirs.Count > 0)
                    return souvenirs[index];
                 else return null;
             }
         }
-        //Итератор по элементам коллекции
+        /// <summary>
+        /// Итератор по элементам списка сувениров
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator GetEnumerator()
         {
             for(int i = 0; i < souvenirs.Count; i++)
@@ -47,34 +57,53 @@ namespace Plarium_Lesson9
                 yield return souvenirs[i];
             }
         }
-        //Метод, который возвращает количество элементов в списке
+        /// <summary>
+        /// Метод возвращает количество элементов в списке
+        /// </summary>
+        /// <returns></returns>
         public int Length()
         {
             return souvenirs.Count;
         }
-        //Метод удаления элемента списка по индексу
+        /// <summary>
+        /// Метод удаляет элемент списка по индексу
+        /// </summary>
+        /// <param name="key"></param>
         public void Remove(int key)
         {
             if(souvenirs.Count > 0)
             souvenirs.RemoveAt(key);
         }
-        //Метод добавления объекта в список
+        /// <summary>
+        /// Метод добавляет объект в список
+        /// </summary>
+        /// <param name="souvenir"></param>
         public void Add(Souvenir souvenir)
         {
             souvenirs.Add(souvenir);
         }
-        //Очищение списка
+        /// <summary>
+        /// Метод очищает список
+        /// </summary>
         public void Clear()
         {
             souvenirs.Clear();
         } 
-        //Сортировка списка по цене
+        /// <summary>
+        /// Метод сортирует список по цене
+        /// </summary>
         public void SortByPrice()=> souvenirs.Sort(new ComparerByPrice());
-        //Сортировка списка по названию
+        /// <summary>
+        /// Метод сортирует список по названию
+        /// </summary>
         public void SortBySouvenirName() => souvenirs.Sort(new ComparerBySouvenirName());
 
-        //Подписчик на событие ManufacturerRemoved - удаление производителя
-        //Метод при возникновении события удаления производителя, удаляет его сувениры
+        /// <summary>
+        /// Метод при возникновении события удаления производителя, удаляет его сувениры
+        /// Подписчик на событие ManufacturerRemoved - удаление производителя
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="keyEventArgs"></param>
         public void DeleteObjectsByKey (object source, EventDelegate.KeyEventArgs keyEventArgs)
         {
             bool flag = false;

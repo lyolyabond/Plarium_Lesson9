@@ -7,6 +7,9 @@ namespace Plarium_Lesson9
 {
     class Menu
     {
+        /// <summary>
+        /// Меню для взаимодействия с коллекциями
+        /// </summary>
         public static void ConsoleMenu()
         {
             var eventDelete = new Manufacturer();
@@ -105,6 +108,9 @@ namespace Plarium_Lesson9
 
             } while (true);
         }
+        /// <summary>
+        /// Меню для взаимодействия с базами данных
+        /// </summary>
         public static void DatabaseMenu()
         {
             Console.Write("Введите название БД: ");
@@ -154,7 +160,10 @@ namespace Plarium_Lesson9
 
         }
 
-        //Метод для выбора типа сувенира
+        /// <summary>
+        /// Меню для выбора типа сувенира
+        /// </summary>
+        /// <returns></returns>
         public static Souvenir ChooseTypeOfSouvenir()
         {
             Console.WriteLine("Выберите вид сувенира: ");
@@ -190,10 +199,11 @@ namespace Plarium_Lesson9
                     return null;
             }
         }
-    
 
-    //Метод ввода информации о сувенире
-    public static void EnterInformation()
+        /// <summary>
+        /// Метод для ввода информации о сувенире
+        /// </summary>
+        public static void EnterInformation()
     {
         Souvenir souvenir = ChooseTypeOfSouvenir();
         if (souvenir != null)
@@ -207,6 +217,7 @@ namespace Plarium_Lesson9
            //Добавление производителя в словарь 
            AddDelete.AddManufacturer(new Manufacturer(Input.InputManufacturerName(), Input.InputManufacturerCountry()));
            Console.WriteLine("--------------------------");
+           //Файл очищается, чтобы не хранить некорректную информацию
            File.WriteAllText(Program.path, String.Empty);
            Console.Clear();
         }

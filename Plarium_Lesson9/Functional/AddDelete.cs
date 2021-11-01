@@ -14,13 +14,21 @@ namespace Plarium_Lesson9
         //Объект класса для работы со списком сувениров
         public static CollectionClass collectionClass = new CollectionClass();
 
-        //Метод добавления объекта производителя в словарь
+
+        /// <summary>
+        /// Метод добавляет объект производителя в словарь
+        /// </summary>
+        /// <param name="manufacturer"></param>
         public static void AddManufacturer(Manufacturer manufacturer)
         {
             Manufacturers.Add(ID, manufacturer);
+            //Файл очищается, чтобы не хранить некорректную информацию
             File.WriteAllText(Program.path, String.Empty);
         }
-        //Метод для удаления элементов массива по заданному названию производителя
+        /// <summary>
+        /// Метод удаляет объект из словаря по заданному названию производителя
+        /// </summary>
+        /// <param name="eventDelete"></param>
         public static void DeleteItemByManufacturer(Manufacturer eventDelete)
         {
             Console.Write("Введите название производителя: ");
@@ -40,6 +48,7 @@ namespace Plarium_Lesson9
                         Manufacturers.Remove(keyValue.Key);
                         //Метод, который вызывает событие
                         eventDelete.RemoveManufacturer(keyValue.Key);
+                        //Файл очищается, чтобы не хранить некорректную информацию
                         File.WriteAllText(Program.path, String.Empty);
                         flag = true;
                     }
@@ -53,12 +62,15 @@ namespace Plarium_Lesson9
             }
     
         }
-        //Метод очищения коллекций
+        /// <summary>
+        /// Метод очищает коллекции
+        /// </summary>
         public static void ClearCollections()
         {
             collectionClass.Clear();
             Manufacturers.Clear();
             Console.WriteLine("Коллекции очищены.");
+            //Файл очищается, чтобы не хранить некорректную информацию
             File.WriteAllText(Program.path, String.Empty);
         }
     }   
