@@ -47,7 +47,39 @@ namespace Plarium_Lesson9
             }
             else Console.WriteLine("Такого файла не существует!");
         }
-
+        /// <summary>
+        /// Метод добавляет запись о сувенире в БД
+        /// </summary>
+        /// <param name="path"></param>
+        public static void AddSouvenirToDatabase(string path)
+        {
+            path += ".txt";
+            int index = AddDelete.collectionClass.Length() - 1;
+            if (AddDelete.collectionClass.Length() > 0 && File.Exists(path))
+            {
+                using (var sw = new StreamWriter(path, true))
+                {
+                    AddDelete.collectionClass[index].WriteToDatabase(sw);
+                }
+            }
+        }
+        /// <summary>
+        /// Метод добавляет запись о производителе в БД
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="path"></param>
+        public static void AddManufacturerToDatabase(int id, string path)
+        {
+            path += ".txt";
+            if (AddDelete.collectionClass.Length() > 0 && File.Exists(path))
+            {
+                using (var sw = new StreamWriter(path, true))
+                {
+                    sw.Write($"{AddDelete.Manufacturers[id].ManufacturerName};");
+                    sw.WriteLine($"{AddDelete.Manufacturers[id].ManufacturerCountry}");
+                }
+             }
+        }
         /// <summary>
         /// Метод обновляет содержимое БД
         /// </summary>
@@ -65,7 +97,7 @@ namespace Plarium_Lesson9
                         souvenir.WriteToDatabase(sw);
                        if(AddDelete.Manufacturers.ContainsKey(souvenir.ManufacturerRequisites))
                         {
-                                sw.Write($"{AddDelete.Manufacturers[souvenir.ManufacturerRequisites].ManufacturerName},");
+                                sw.Write($"{AddDelete.Manufacturers[souvenir.ManufacturerRequisites].ManufacturerName};");
                                 sw.WriteLine($"{AddDelete.Manufacturers[souvenir.ManufacturerRequisites].ManufacturerCountry}");
                         }
                     }

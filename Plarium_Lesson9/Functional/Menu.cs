@@ -7,6 +7,7 @@ namespace Plarium_Lesson9
 {
     class Menu
     {
+        public static string databaseName;
         /// <summary>
         /// Меню для взаимодействия с коллекциями
         /// </summary>
@@ -114,7 +115,7 @@ namespace Plarium_Lesson9
         public static void DatabaseMenu()
         {
             Console.Write("Введите название БД: ");
-            string databaseName = Console.ReadLine();
+             databaseName = Console.ReadLine();
             do
             {
                 Console.WriteLine("--Выберите действие: --");

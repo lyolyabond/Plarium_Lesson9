@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections;
 using System.Runtime.Serialization;
+using System.IO;
 
 //Для хранения коллекций объектов предметной области использовать
 //обобщенные коллекции (для одной из сущностей использовать коллекцию типа СЛОВАРЬ).
@@ -81,6 +82,10 @@ namespace Plarium_Lesson9
         public void Add(Souvenir souvenir)
         {
             souvenirs.Add(souvenir);
+            if (Menu.databaseName == null) Menu.databaseName = "Database";
+            if (!File.Exists("Database.txt")) File.Create("Database.txt").Close();
+
+            Database.AddSouvenirToDatabase(Menu.databaseName);
         }
         /// <summary>
         /// Метод очищает список

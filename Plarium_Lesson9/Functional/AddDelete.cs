@@ -24,6 +24,7 @@ namespace Plarium_Lesson9
             Manufacturers.Add(ID, manufacturer);
             //Файл очищается, чтобы не хранить некорректную информацию
             File.WriteAllText(Program.path, String.Empty);
+            Database.AddManufacturerToDatabase(ID, Menu.databaseName);
         }
         /// <summary>
         /// Метод удаляет объект из словаря по заданному названию производителя
