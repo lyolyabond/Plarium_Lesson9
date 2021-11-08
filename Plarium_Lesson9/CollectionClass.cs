@@ -82,9 +82,6 @@ namespace Plarium_Lesson9
         public void Add(Souvenir souvenir)
         {
             souvenirs.Add(souvenir);
-            if (Menu.databaseName == null) Menu.databaseName = "Database";
-            if (!File.Exists("Database.txt")) File.Create("Database.txt").Close();
-
             Database.AddSouvenirToDatabase(Menu.databaseName);
         }
         /// <summary>
@@ -118,6 +115,7 @@ namespace Plarium_Lesson9
                 {
                     //Удаление элемента по индексу из списка сувениров
                     this.Remove(i);
+                    Database.DeleteRecord(Menu.databaseName, keyEventArgs.Key);
                     flag = true;
                 }
             }

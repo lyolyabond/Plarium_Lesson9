@@ -43,7 +43,7 @@ namespace Plarium_Lesson9
                 //Проход по элементам словаря
                 foreach (KeyValuePair<int, Manufacturer> keyValue in Manufacturers)
                 {//Проверка, есть ли такое название
-                    if (keyValue.Value.ManufacturerName == name)
+                    if (string.Equals(keyValue.Value.ManufacturerName, name, StringComparison.OrdinalIgnoreCase))
                     {
                         //Удаление элемента по ключу из словаря производителей
                         Manufacturers.Remove(keyValue.Key);

@@ -7,12 +7,13 @@ namespace Plarium_Lesson9
 {
     class Menu
     {
-        public static string databaseName;
+        public static string databaseName = "Database";
         /// <summary>
         /// Меню для взаимодействия с коллекциями
         /// </summary>
         public static void ConsoleMenu()
         {
+               
             var eventDelete = new Manufacturer();
             //Подписка на событие
             eventDelete.ManufacturerRemoved += AddDelete.collectionClass.DeleteObjectsByKey;

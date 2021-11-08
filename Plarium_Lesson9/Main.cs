@@ -34,6 +34,9 @@ namespace Plarium_Lesson9
         public static string path = "Result.txt";
         static void Main(string[] args)
         {
+            if (!File.Exists(Menu.databaseName + ".txt")) File.Create(Menu.databaseName + ".txt").Close();
+            else File.WriteAllText(Menu.databaseName + ".txt", String.Empty);
+
             Serialization.Deserialization();
             //Создание файла для записи/чтения результатов запросов к коллекциям сущностей
             File.CreateText(path).Close();

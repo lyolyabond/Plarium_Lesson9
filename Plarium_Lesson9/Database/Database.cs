@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Linq;
 
 namespace Plarium_Lesson9
 {
@@ -97,7 +98,7 @@ namespace Plarium_Lesson9
                         souvenir.WriteToDatabase(sw);
                        if(AddDelete.Manufacturers.ContainsKey(souvenir.ManufacturerRequisites))
                         {
-                                sw.Write($"{AddDelete.Manufacturers[souvenir.ManufacturerRequisites].ManufacturerName};");
+                                sw.Write($"{AddDelete.Manufacturers[souvenir.ManufacturerRequisites].ManufacturerName},");
                                 sw.WriteLine($"{AddDelete.Manufacturers[souvenir.ManufacturerRequisites].ManufacturerCountry}");
                         }
                     }
@@ -105,6 +106,23 @@ namespace Plarium_Lesson9
                 Console.WriteLine($"Файл обновлён!");
             }
             else Console.WriteLine("Такого файла не существует или список пуст!");
+        }
+        /// <summary>
+        /// Метод удаляет запись из БД по ключу
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="key"></param>
+        public static void DeleteRecord(string path, int key)
+        {
+            path += ".txt";
+            string pathTemporary = "Temporary.txt";
+            if (File.Exists(path))
+            {
+                var lines = File.ReadLines(path).Where(l => !l.Contains("," + key.ToString() + ","));
+                File.WriteAllLines(pathTemporary, lines);
+                File.Delete(path);
+                File.Move(pathTemporary, path);
+            }
         }
         /// <summary>
         /// Метод удаляет указанную БД, если она существует
