@@ -35,14 +35,11 @@ namespace Plarium_Lesson9
             sw.WriteLine("--------------------------");
         }
         /// <summary>
-        /// Переопределённый метод для записи информации в БД
+        /// Переопределённый метод для получения строки-записи в БД о сувенире
         /// </summary>
-        /// <param name="sw"></param>
-        public override void WriteToDatabase(StreamWriter sw)
-        {
-            base.WriteToDatabase(sw);
-            sw.Write($"{this.CompanyName},");
-        }
+        /// <returns></returns>
+        public override string Record() => base.Record() + $"{this.CompanyName};";
+        
         /// <summary>
         /// Переопределённый метод для вывода информации в консоль
         /// </summary>

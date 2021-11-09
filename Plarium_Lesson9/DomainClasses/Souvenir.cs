@@ -47,17 +47,19 @@ namespace Plarium_Lesson9
             sw.WriteLine($"Цена: {Price}");
         }
         /// <summary>
+        /// Метод для получения строки-записи в БД о сувенире
+        /// </summary>
+        /// <returns></returns>
+        public virtual string Record()
+        {
+            return $"{this.KindOfSouvenir};{this.SouvenirName};{this.ReleaseDate};{this.Price};{this.ManufacturerRequisites};";
+        }
+        /// <summary>
         /// Метод для записи информации в БД
         /// </summary>
         /// <param name="sw"></param>
-        public virtual void WriteToDatabase(StreamWriter sw)
-        {
-            sw.Write($"{this.KindOfSouvenir},");
-            sw.Write($"{this.SouvenirName},");
-            sw.Write($"{this.ReleaseDate},");
-            sw.Write($"{this.Price},");
-            sw.Write($"{this.ManufacturerRequisites},");
-        }
+        public virtual void WriteToDatabase(StreamWriter sw)=> sw.Write(Record());
+        
         /// <summary>
         /// Метод для вывода информации в консоль
         /// </summary>

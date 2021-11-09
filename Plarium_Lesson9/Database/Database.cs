@@ -8,6 +8,7 @@ namespace Plarium_Lesson9
 {
     class Database
     {
+        static string pathTemporary = "Temporary.txt";
         /// <summary>
         /// Метод создаёт БД по указаному названию, если она ещё не существует
         /// </summary>
@@ -76,8 +77,7 @@ namespace Plarium_Lesson9
             {
                 using (var sw = new StreamWriter(path, true))
                 {
-                    sw.Write($"{AddDelete.Manufacturers[id].ManufacturerName};");
-                    sw.WriteLine($"{AddDelete.Manufacturers[id].ManufacturerCountry}");
+                    AddDelete.Manufacturers[id].WriteToDatabase(sw);
                 }
              }
         }
@@ -98,8 +98,7 @@ namespace Plarium_Lesson9
                         souvenir.WriteToDatabase(sw);
                        if(AddDelete.Manufacturers.ContainsKey(souvenir.ManufacturerRequisites))
                         {
-                                sw.Write($"{AddDelete.Manufacturers[souvenir.ManufacturerRequisites].ManufacturerName},");
-                                sw.WriteLine($"{AddDelete.Manufacturers[souvenir.ManufacturerRequisites].ManufacturerCountry}");
+                            AddDelete.Manufacturers[souvenir.ManufacturerRequisites].WriteToDatabase(sw);
                         }
                     }
                 }
@@ -108,17 +107,49 @@ namespace Plarium_Lesson9
             else Console.WriteLine("Такого файла не существует или список пуст!");
         }
         /// <summary>
+        /// Метод меняет цену в БД 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="souvenir"></param>
+        /// <param name="newPrice"></param>
+        public static void ChangePrice(string path, Souvenir souvenir, decimal newPrice)
+        {
+            path += ".txt";
+            
+            if (File.Exists(path))
+            {
+                string text;
+                using (var sr = new StreamReader(path))
+                {
+                    text = sr.ReadToEnd();
+                }
+                
+                string oldRecord = souvenir.Record();
+                if (text.Contains(oldRecord))
+                {
+                    souvenir.Price = newPrice;
+                    string newText = text.Replace(oldRecord, souvenir.Record());
+                    using (var sw = new StreamWriter(pathTemporary))
+                    {
+                        sw.Write(newText);
+                    }
+                      
+                    File.Delete(path);
+                    File.Move(pathTemporary, path);
+                }
+            }
+        }
+        /// <summary>
         /// Метод удаляет запись из БД по ключу
         /// </summary>
         /// <param name="path"></param>
         /// <param name="key"></param>
         public static void DeleteRecord(string path, int key)
         {
-            path += ".txt";
-            string pathTemporary = "Temporary.txt";
+            path += ".txt"; 
             if (File.Exists(path))
             {
-                var lines = File.ReadLines(path).Where(l => !l.Contains("," + key.ToString() + ","));
+                var lines = File.ReadLines(path).Where(l => !l.Contains(";" + key.ToString() + ";"));
                 File.WriteAllLines(pathTemporary, lines);
                 File.Delete(path);
                 File.Move(pathTemporary, path);

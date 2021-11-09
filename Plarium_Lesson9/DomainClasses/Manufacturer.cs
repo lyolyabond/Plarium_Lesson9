@@ -44,6 +44,17 @@ namespace Plarium_Lesson9
             Console.WriteLine($"Страна производителя: {ManufacturerCountry}");
             Console.WriteLine("--------------------------");
         }
+        /// <summary>
+        /// Метод для получения строки-записи в БД о производителе
+        /// </summary>
+        /// <returns></returns>
+        public string Record() => $"{this.ManufacturerName};{this.ManufacturerCountry}\n";
+        /// <summary>
+        /// Метод записывает информацию в БД
+        /// </summary>
+        /// <param name="sw"></param>
+        public void WriteToDatabase(StreamWriter sw) => sw.Write(Record());
+
 
         /// <summary>
         /// Метод для вызова события удаления производителя

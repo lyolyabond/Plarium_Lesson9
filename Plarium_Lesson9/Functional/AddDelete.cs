@@ -73,6 +73,7 @@ namespace Plarium_Lesson9
             Console.WriteLine("Коллекции очищены.");
             //Файл очищается, чтобы не хранить некорректную информацию
             File.WriteAllText(Program.path, String.Empty);
+            File.WriteAllText(Menu.databaseName +".txt", String.Empty);
         }
     }   
 }
